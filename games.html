@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ron Lab</title>
+    <title>Games & Experimental - Ron Lab</title>
     <link rel="stylesheet" href="styles.css">
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -105,6 +105,13 @@
             max-width: 1200px;
             margin: 0 auto;
         }
+
+        /* Back to home link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
     </style>
 </head>
 <body>
@@ -113,119 +120,49 @@
     </header>
 
     <main class="content-container">
+        <div class="back-link">
+            <a href="index.html">← Back to Home</a>
+        </div>
+
         <!-- Hero Section -->
         <section class="hero">
-            <h2>Your Personal Lab Hub</h2>
-            <p>A collection of services, projects, and experiments. Explore various tools for media, storage, information, and play.</p>
+            <h2>Games & Experimental</h2>
+            <p>A collection of interactive games and experimental tools. Test your skills, explore creative projects, and discover innovative experiments.</p>
         </section>
 
-        <!-- Services Section -->
+        <!-- Games Section -->
         <section>
-            <h3 class="section-title">Services</h3>
-            <div class="card-grid">
-                <a href="https://movie.ronlab.site" class="card-link">
-                    <div class="card">
-                        <h3>Jellyfin</h3>
-                        <p>Media server for streaming your personal collection of movies and TV shows.</p>
-                    </div>
-                </a>
-                <a href="https://cloud.ronlab.site" class="card-link">
-                    <div class="card">
-                        <h3>Files</h3>
-                        <p>Cloud storage for accessing and sharing files across all your devices.</p>
-                    </div>
-                </a>
-                <a href="https://wiki.ronlab.site" class="card-link">
-                    <div class="card">
-                        <h3>Wiki</h3>
-                        <p>Knowledge base for documentation and collaborative information sharing.</p>
-                    </div>
-                </a>
-                <a href="https://map.ronlab.site" class="card-link">
-                    <div class="card">
-                        <h3>Map</h3>
-                        <p>Minecraft Vanilla Server map. Explore and visualize your world.</p>
-                    </div>
-                </a>
-                <a href="https://status.ronlab.site" class="card-link">
-                    <div class="card">
-                        <h3>Status</h3>
-                        <p>Real-time monitoring and status of all RonLab services.</p>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <!-- Minecraft Section -->
-        <section>
-            <h3 class="section-title">Minecraft</h3>
-            <div class="card-grid">
-                <a href="https://crafty.ronlab.site/status" class="card-link">
-                    <div class="card">
-                        <h3>Server Status</h3>
-                        <p>Check the status of all Minecraft servers. View player counts and server information.</p>
-                    </div>
-                </a>
-                <a href="minecraft.html" class="card-link">
-                    <div class="card">
-                        <h3>Server Addresses</h3>
-                        <p>MultiMode Java & Bedrock servers, Survival, and Modded servers available.</p>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <!-- Games & Experimental Section -->
-        <section>
-            <h3 class="section-title">Games & Experimental</h3>
+            <h3 class="section-title">Games</h3>
             <div class="card-grid">
                 <a href="snake.html" class="card-link">
                     <div class="card">
                         <h3>Snake</h3>
-                        <p>Classic snake game. Navigate and grow your snake without hitting walls or yourself.</p>
+                        <p>Navigate your snake through the grid and consume food to grow. Classic gameplay with increasing difficulty. How long can you survive?</p>
                     </div>
                 </a>
                 <a href="flappy.html" class="card-link">
                     <div class="card">
                         <h3>Flappy Bird</h3>
-                        <p>Tap to flap and fly through the pipes. How high can you score?</p>
+                        <p>Tap to flap and navigate through the pipes. Time your jumps perfectly and climb the leaderboard. A test of reflexes and precision.</p>
                     </div>
                 </a>
                 <a href="rongario.html" class="card-link">
                     <div class="card">
                         <h3>Rongario</h3>
-                        <p>Platform adventure game. Explore and complete challenges.</p>
-                    </div>
-                </a>
-                <a href="discord.html" class="card-link">
-                    <div class="card">
-                        <h3>Discord Color Engine</h3>
-                        <p>Tool for creating and exploring Discord color themes.</p>
+                        <p>Platform adventure game with exploration and challenges. Jump, collect, and conquer obstacles in a pixelated world.</p>
                     </div>
                 </a>
             </div>
         </section>
 
-        <!-- Other Section -->
+        <!-- Experimental Tools Section -->
         <section>
-            <h3 class="section-title">Other</h3>
+            <h3 class="section-title">Experimental Tools</h3>
             <div class="card-grid">
-                <a href="https://drive.google.com/drive/folders/1ktByD3DAhQ_q4QXqc3JjcEOgUtWaC5j9?usp=sharing" class="card-link">
+                <a href="discord.html" class="card-link">
                     <div class="card">
-                        <h3>Ron Lab Modpack</h3>
-                        <p>Curated collection of mods for an enhanced Minecraft experience.</p>
-                    </div>
-                </a>
-                <a href="https://forms.gle/BwYJrXEqpxPvxcif6" class="card-link">
-                    <div class="card">
-                        <h3>Request Form</h3>
-                        <p>Have a feature request or suggestion? Submit your ideas here.</p>
-                    </div>
-                </a>
-                <a href="sitemap.html" class="card-link">
-                    <div class="card">
-                        <h3>Sitemap</h3>
-                        <p>Browse the complete site structure and all available pages.</p>
+                        <h3>Discord Color Engine</h3>
+                        <p>Explore and create custom Discord color themes. Generate palettes and test how your color choices look in the Discord interface.</p>
                     </div>
                 </a>
             </div>
@@ -235,7 +172,8 @@
     <footer>
         <p>&copy; 2023–<span id="year"></span> ron</p>
         <p><a href="sitemap.html">Sitemap</a></p>
-        <p style="font-size: 0.9rem; color: #999; margin-top: 1rem;">Crafted with passion and curiosity</p>
+        <p style="font-size: 0.9rem; color: #999; margin-top: 1rem;">Some tools are modified forks — <a href="#">Credits</a></p>
+        <p style="font-size: 0.9rem; margin-top: 0.5rem;"><a href="index.html">Back to Home</a></p>
     </footer>
 
     <button id="darkModeToggle">Toggle Dark Mode</button>

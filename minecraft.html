@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Servers - Ron Lab</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000222">
+    <meta name="apple-mobile-web-app-title" content="Ron Lab">
+    <meta name="application-name" content="Ron Lab">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Apple Mobile Web App Status Bar Style -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <style>
+        /* Hero section styles */
+        .hero {
+            background: linear-gradient(135deg, #000222 0%, #1a1a3e 100%);
+            color: #fff;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            animation: fadeUp 0.6s ease-out;
+        }
+
+        .hero h2 {
+            font-family: 'biome', sans-serif;
+            font-size: 2rem;
+            margin: 0 0 1rem 0;
+            color: #b12124;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+            color: #defffc;
+        }
+
+        /* Section titles */
+        .section-title {
+            font-family: 'biome', sans-serif;
+            color: #b12124;
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            margin-top: 2rem;
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: #b12124;
+            border-radius: 2px;
+        }
+
+        .dark-mode .hero {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a4e 100%);
+        }
+
+        .dark-mode .hero h2 {
+            color: #defffc;
+        }
+
+        .dark-mode .section-title {
+            color: #defffc;
+        }
+
+        .dark-mode .section-title::after {
+            background-color: #defffc;
+        }
+
+        /* Responsive container */
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Server card styles */
+        .server-card {
+            background-color: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .server-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #b12124 0%, #ff4444 50%, #b12124 100%);
+            background-size: 200% 100%;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .server-card:hover {
+            border-color: #b12124;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(177, 33, 36, 0.15);
+        }
+
+        .server-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .server-card h3 {
+            font-family: 'biome', sans-serif;
+            color: #000222;
+            margin: 0;
+            font-size: 1.25rem;
+            transition: color 0.3s ease;
+        }
+
+        .server-card:hover h3 {
+            color: #b12124;
+        }
+
+        .server-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .server-info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.95rem;
+        }
+
+        .server-info-label {
+            font-weight: 500;
+            color: #555;
+        }
+
+        .server-info-value {
+            color: #333;
+            font-family: monospace;
+            word-break: break-all;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.35rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            width: fit-content;
+        }
+
+        .status-testing {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .status-active {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-offline {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .btn-copy {
+            background-color: #b12124;
+            color: #fff;
+            border: 2px solid #b12124;
+            padding: 0.65rem 1.25rem;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-family: 'biome light', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            align-self: flex-start;
+        }
+
+        .btn-copy:hover {
+            background-color: #8b1a1c;
+            border-color: #8b1a1c;
+            box-shadow: 0 4px 12px rgba(177, 33, 36, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .btn-copy:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 6px rgba(177, 33, 36, 0.3);
+        }
+
+        .btn-copy.copied {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .server-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+            animation: fadeUp 0.6s ease-out;
+        }
+
+        .description-text {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Resources section */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+            animation: fadeUp 0.6s ease-out;
+        }
+
+        .resource-card {
+            background-color: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .resource-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #b12124 0%, #ff4444 50%, #b12124 100%);
+            background-size: 200% 100%;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .resource-card:hover {
+            border-color: #b12124;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(177, 33, 36, 0.15);
+        }
+
+        .resource-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .resource-card a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .resource-card h3 {
+            font-family: 'biome', sans-serif;
+            color: #000222;
+            margin: 0 0 0.75rem 0;
+            font-size: 1.25rem;
+            transition: color 0.3s ease;
+        }
+
+        .resource-card:hover h3 {
+            color: #b12124;
+        }
+
+        .resource-card p {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* Dark mode server card styles */
+        .dark-mode .server-card {
+            background-color: #1a1a1a;
+            border-color: #444;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .dark-mode .server-card:hover {
+            border-color: #defffc;
+            box-shadow: 0 8px 16px rgba(222, 255, 252, 0.15);
+        }
+
+        .dark-mode .server-card h3 {
+            color: #defffc;
+        }
+
+        .dark-mode .server-card:hover h3 {
+            color: #defffc;
+        }
+
+        .dark-mode .server-info-label {
+            color: #ccc;
+        }
+
+        .dark-mode .server-info-value {
+            color: #defffc;
+        }
+
+        .dark-mode .description-text {
+            color: #ccc;
+        }
+
+        .dark-mode .btn-copy {
+            background-color: #b12124;
+            border-color: #b12124;
+            color: #fff;
+        }
+
+        .dark-mode .btn-copy:hover {
+            background-color: #d44449;
+            border-color: #d44449;
+            box-shadow: 0 4px 12px rgba(177, 33, 36, 0.5);
+        }
+
+        .dark-mode .resource-card {
+            background-color: #1a1a1a;
+            border-color: #444;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .dark-mode .resource-card:hover {
+            border-color: #defffc;
+            box-shadow: 0 8px 16px rgba(222, 255, 252, 0.15);
+        }
+
+        .dark-mode .resource-card h3 {
+            color: #defffc;
+        }
+
+        .dark-mode .resource-card:hover h3 {
+            color: #defffc;
+        }
+
+        .dark-mode .resource-card p {
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Minecraft Servers</h1>
+    </header>
+
+    <main class="content-container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h2>Minecraft Server Hub</h2>
+            <p>Access all available Minecraft servers in one place. Copy server addresses to your clipboard and join your favorite mode today.</p>
+        </section>
+
+        <!-- Server Listings -->
+        <section>
+            <h3 class="section-title">Active Servers</h3>
+            <div class="server-grid">
+                <!-- MultiMode Java -->
+                <div class="server-card">
+                    <h3>MultiMode Java</h3>
+                    <p class="description-text">Latest version Java server with multi-mode gameplay support and testing features.</p>
+                    <div class="server-info">
+                        <div class="server-info-row">
+                            <span class="server-info-label">Address:</span>
+                            <span class="server-info-value">mc.ronlab.site</span>
+                        </div>
+                        <div class="server-info-row">
+                            <span class="server-info-label">Version:</span>
+                            <span class="server-info-value">1.21.11</span>
+                        </div>
+                        <div class="server-info-row">
+                            <span class="server-info-label">Status:</span>
+                            <span class="status-badge status-testing">Testing</span>
+                        </div>
+                    </div>
+                    <button class="btn-copy" data-ip="mc.ronlab.site">Copy Address</button>
+                </div>
+
+                <!-- MultiMode Bedrock -->
+                <div class="server-card">
+                    <h3>MultiMode Bedrock</h3>
+                    <p class="description-text">Cross-platform Bedrock server with multi-mode support for mobile and console players.</p>
+                    <div class="server-info">
+                        <div class="server-info-row">
+                            <span class="server-info-label">Address:</span>
+                            <span class="server-info-value">ronlab.site</span>
+                        </div>
+                        <div class="server-info-row">
+                            <span class="server-info-label">Port:</span>
+                            <span class="server-info-value">19132</span>
+                        </div>
+                        <div class="server-info-row">
+                            <span class="server-info-label">Version:</span>
+                            <span class="server-info-value">1.21.11</span>
+                        </div>
+                        <div class="server-info-row">
+                            <span class="server-info-label">Status:</span>
+                            <span class="status-badge status-testing">Testing</span>
+                        </div>
+                    </div>
+                    <button class="btn-copy" data-ip="ronlab.site:19132">Copy Address</button>
+                </div>
+
+                <!-- Survival Java -->
+                <div class="server-card">
+                    <h3>Survival Java</h3>
+                    <p class="description-text">Long-running survival server with established world and community. Build and explore together.</p>
+                    <div class="server-info">
+                        <div class="server-info-row">
+                            <span class="server-info-label">Address:</span>
+                            <span class="server-info-value">craft.ronlab.site</span>
+                        </div>
+                        <div class="server-info-row">
+                            <span class="server-info-label">Version:</span>
+                            <span class="server-info-value">26.1</span>
+                        </div>
+                        <div class="server-info-row">
+                            <span class="server-info-label">Status:</span>
+                            <span class="status-badge status-active">Active</span>
+                        </div>
+                    </div>
+                    <button class="btn-copy" data-ip="craft.ronlab.site">Copy Address</button>
+                </div>
+
+                <!-- Java Forge -->
+                <div class="server-card">
+                    <h3>Java Forge</h3>
+                    <p class="description-text">Modded Java server with custom mod pack. Server currently paused for maintenance.</p>
+                    <div class="server-info">
+                        <div class="server-info-row">
+                            <span class="server-info-label">Address:</span>
+                            <span class="server-info-value">mod.ronlab.site</span>
+                        </div>
+                        <div class="server-info-row">
+                            <span class="server-info-label">Modpack:</span>
+                            <span class="server-info-value">Ron Lab Modpack</span>
+                        </div>
+                        <div class="server-info-row">
+                            <span class="server-info-label">Status:</span>
+                            <span class="status-badge status-offline">Offline</span>
+                        </div>
+                    </div>
+                    <button class="btn-copy" data-ip="mod.ronlab.site" disabled>Copy Address</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section>
+            <h3 class="section-title">Resources</h3>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <a href="https://map.ronlab.site" target="_blank" rel="noopener noreferrer">
+                        <h3>Server Map</h3>
+                        <p>View real-time map of the Survival Java server. Explore terrain, locate players, and find landmarks.</p>
+                    </a>
+                </div>
+                <div class="resource-card">
+                    <a href="https://crafty.ronlab.site/status" target="_blank" rel="noopener noreferrer">
+                        <h3>Server Status</h3>
+                        <p>Check live server status, player counts, and performance metrics for all Minecraft servers.</p>
+                    </a>
+                </div>
+                <div class="resource-card">
+                    <a href="https://drive.google.com/drive/folders/1ktByD3DAhQ_q4QXqc3JjcEOgUtWaC5j9?usp=sharing" target="_blank" rel="noopener noreferrer">
+                        <h3>Ron Lab Modpack</h3>
+                        <p>Download the curated modpack for the Java Forge server. Enhanced gameplay with community-tested mods.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023–<span id="year"></span> ron</p>
+        <p><a href="sitemap.html">Sitemap</a> | <a href="index.html">Back to Home</a></p>
+    </footer>
+
+    <button id="darkModeToggle">Toggle Dark Mode</button>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Copy to clipboard functionality
+        document.querySelectorAll('.btn-copy').forEach(button => {
+            button.addEventListener('click', async function(e) {
+                if (this.disabled) return;
+
+                const ip = this.getAttribute('data-ip');
+                const originalText = this.textContent;
+
+                try {
+                    await navigator.clipboard.writeText(ip);
+                    this.textContent = 'Copied!';
+                    this.classList.add('copied');
+
+                    setTimeout(() => {
+                        this.textContent = originalText;
+                        this.classList.remove('copied');
+                    }, 2000);
+                } catch (err) {
+                    // Fallback for older browsers
+                    const textarea = document.createElement('textarea');
+                    textarea.value = ip;
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    try {
+                        document.execCommand('copy');
+                        this.textContent = 'Copied!';
+                        this.classList.add('copied');
+
+                        setTimeout(() => {
+                            this.textContent = originalText;
+                            this.classList.remove('copied');
+                        }, 2000);
+                    } catch (err) {
+                        alert('Could not copy to clipboard. Please copy manually: ' + ip);
+                    }
+                    document.body.removeChild(textarea);
+                }
+            });
+        });
+
+        // Dark mode toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+
+            const isDarkMode = body.classList.contains('dark-mode');
+            if (isDarkMode) {
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        });
+
+        // Apply dark mode status on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const isDarkMode = localStorage.getItem('darkMode');
+
+            if (isDarkMode === 'enabled') {
+                body.classList.add('dark-mode');
+            }
+        });
+    </script>
+
+</body>
+</html>

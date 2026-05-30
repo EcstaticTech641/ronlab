@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ron Lab</title>
+    <title>Other Resources - Ron Lab</title>
     <link rel="stylesheet" href="styles.css">
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -105,130 +105,67 @@
             max-width: 1200px;
             margin: 0 auto;
         }
+
+        /* Navigation links */
+        .nav-links {
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: fadeUp 0.6s ease-out;
+        }
+
+        .nav-links a {
+            display: inline-block;
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-links a:hover {
+            border-bottom-color: #b12124;
+        }
+
+        .dark-mode .nav-links a:hover {
+            border-bottom-color: #defffc;
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1>Welcome to the RonLab</h1>
+        <h1>Other Resources</h1>
     </header>
 
     <main class="content-container">
         <!-- Hero Section -->
         <section class="hero">
-            <h2>Your Personal Lab Hub</h2>
-            <p>A collection of services, projects, and experiments. Explore various tools for media, storage, information, and play.</p>
+            <h2>Miscellaneous Resources</h2>
+            <p>Additional tools and resources for the Ron Lab community. Submit requests, access our modpack, and explore everything else we have to offer.</p>
         </section>
 
-        <!-- Services Section -->
+        <!-- Resources Section -->
         <section>
-            <h3 class="section-title">Services</h3>
+            <h3 class="section-title">Resources</h3>
             <div class="card-grid">
-                <a href="https://movie.ronlab.site" class="card-link">
-                    <div class="card">
-                        <h3>Jellyfin</h3>
-                        <p>Media server for streaming your personal collection of movies and TV shows.</p>
-                    </div>
-                </a>
-                <a href="https://cloud.ronlab.site" class="card-link">
-                    <div class="card">
-                        <h3>Files</h3>
-                        <p>Cloud storage for accessing and sharing files across all your devices.</p>
-                    </div>
-                </a>
-                <a href="https://wiki.ronlab.site" class="card-link">
-                    <div class="card">
-                        <h3>Wiki</h3>
-                        <p>Knowledge base for documentation and collaborative information sharing.</p>
-                    </div>
-                </a>
-                <a href="https://map.ronlab.site" class="card-link">
-                    <div class="card">
-                        <h3>Map</h3>
-                        <p>Minecraft Vanilla Server map. Explore and visualize your world.</p>
-                    </div>
-                </a>
-                <a href="https://status.ronlab.site" class="card-link">
-                    <div class="card">
-                        <h3>Status</h3>
-                        <p>Real-time monitoring and status of all RonLab services.</p>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <!-- Minecraft Section -->
-        <section>
-            <h3 class="section-title">Minecraft</h3>
-            <div class="card-grid">
-                <a href="https://crafty.ronlab.site/status" class="card-link">
-                    <div class="card">
-                        <h3>Server Status</h3>
-                        <p>Check the status of all Minecraft servers. View player counts and server information.</p>
-                    </div>
-                </a>
-                <a href="minecraft.html" class="card-link">
-                    <div class="card">
-                        <h3>Server Addresses</h3>
-                        <p>MultiMode Java & Bedrock servers, Survival, and Modded servers available.</p>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <!-- Games & Experimental Section -->
-        <section>
-            <h3 class="section-title">Games & Experimental</h3>
-            <div class="card-grid">
-                <a href="snake.html" class="card-link">
-                    <div class="card">
-                        <h3>Snake</h3>
-                        <p>Classic snake game. Navigate and grow your snake without hitting walls or yourself.</p>
-                    </div>
-                </a>
-                <a href="flappy.html" class="card-link">
-                    <div class="card">
-                        <h3>Flappy Bird</h3>
-                        <p>Tap to flap and fly through the pipes. How high can you score?</p>
-                    </div>
-                </a>
-                <a href="rongario.html" class="card-link">
-                    <div class="card">
-                        <h3>Rongario</h3>
-                        <p>Platform adventure game. Explore and complete challenges.</p>
-                    </div>
-                </a>
-                <a href="discord.html" class="card-link">
-                    <div class="card">
-                        <h3>Discord Color Engine</h3>
-                        <p>Tool for creating and exploring Discord color themes.</p>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <!-- Other Section -->
-        <section>
-            <h3 class="section-title">Other</h3>
-            <div class="card-grid">
-                <a href="https://drive.google.com/drive/folders/1ktByD3DAhQ_q4QXqc3JjcEOgUtWaC5j9?usp=sharing" class="card-link">
+                <a href="https://drive.google.com/drive/folders/1ktByD3DAhQ_q4QXqc3JjcEOgUtWaC5j9?usp=sharing" class="card-link" target="_blank" rel="noopener noreferrer">
                     <div class="card">
                         <h3>Ron Lab Modpack</h3>
-                        <p>Curated collection of mods for an enhanced Minecraft experience.</p>
+                        <p>Curated collection of mods for an enhanced Minecraft experience. Download and install our custom modpack for Java Edition.</p>
                     </div>
                 </a>
-                <a href="https://forms.gle/BwYJrXEqpxPvxcif6" class="card-link">
+                <a href="https://forms.gle/BwYJrXEqpxPvxcif6" class="card-link" target="_blank" rel="noopener noreferrer">
                     <div class="card">
                         <h3>Request Form</h3>
-                        <p>Have a feature request or suggestion? Submit your ideas here.</p>
-                    </div>
-                </a>
-                <a href="sitemap.html" class="card-link">
-                    <div class="card">
-                        <h3>Sitemap</h3>
-                        <p>Browse the complete site structure and all available pages.</p>
+                        <p>Have a feature request, bug report, or suggestion? Submit your ideas here and help shape the future of Ron Lab.</p>
                     </div>
                 </a>
             </div>
+        </section>
+
+        <!-- Navigation -->
+        <section class="nav-links">
+            <a href="index.html">Back to Home</a>
+            <a href="sitemap.html">Sitemap</a>
         </section>
     </main>
 
