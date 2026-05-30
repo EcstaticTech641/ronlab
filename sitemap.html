@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitemap</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000222">
+    <meta name="apple-mobile-web-app-title" content="Ron Lab">
+    <meta name="application-name" content="Ron Lab">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="script.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Sitemap</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Site Pages</h2>
+            <table id="sitemap-table">
+                <thead>
+                    <tr>
+                        <th>Page Name</th>
+                        <th>Description</th>
+                        <th>URL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Discord</td><td>Copy of Redbanes Color Generator</td><td><a href="/discord.html">/discord.html</a></td></tr><tr><td>Flappy</td><td>Flappy Bird game</td><td><a href="/flappy.html">/flappy.html</a></td></tr><tr><td>Index</td><td>Main landing page</td><td><a href="/index.html">/index.html</a></td></tr><tr><td>Links</td><td>Links to services and games</td><td><a href="/links.html">/links.html</a></td></tr><tr><td>Rongario</td><td>Page in the ronlab site</td><td><a href="/rongario.html">/rongario.html</a></td></tr><tr><td>Sitemap</td><td>Site map of all pages</td><td><a href="/sitemap.html">/sitemap.html</a></td></tr><tr><td>Snake</td><td>Snake game</td><td><a href="/snake.html">/snake.html</a></td></tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 ron</p>
+    </footer>
+</body>
+<script>
+        // JavaScript code to retrieve and apply dark mode status
+        document.addEventListener('DOMContentLoaded', () => {
+            const isDarkMode = localStorage.getItem('darkMode');
+            const body = document.body;
+
+            // Check if dark mode status exists and apply it
+            if (isDarkMode === 'enabled') {
+                body.classList.add('dark-mode');
+            }
+        });
+</script>
+</html>

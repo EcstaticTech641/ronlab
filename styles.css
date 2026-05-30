@@ -1,0 +1,107 @@
+/* Light mode styles */
+body {
+    background-color: #defffc;
+    color: #333; /* Text color for light mode */
+    font-family: 'biome light', sans-serif; /* Font for the rest of the content in light mode */
+}
+
+header {
+    background-color: #000222;
+    color: #b12124;
+    padding: 10px;
+    text-align: center;
+    font-family: 'biome', sans-serif; /* Font for headers in light mode */
+}
+
+/* Dark mode styles */
+.dark-mode {
+    background-color: #5d5d5d;
+    color: #fff;
+}
+
+.dark-mode body {
+    background-color: #000;
+    color: #fff; /* Text color for dark mode */
+    font-family: 'biome light', sans-serif; /* Font for the rest of the content in dark mode */
+}
+
+/* Common styles for both light and dark modes */
+main {
+    margin: 20px;
+    padding: 10px;
+}
+
+/* Footer styles */
+footer {
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    font-family: 'biome light', sans-serif;
+}
+
+.dark-mode footer {
+    color: #fff;
+    font-family: 'biome light', sans-serif;
+}
+
+
+/* Table styles */
+table {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    border: 2px solid #b12124;
+    border-radius: 5px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #b12124;
+}
+
+th {
+    background-color: #000222;
+    color: #b12124;
+    font-family: 'biome', sans-serif;
+}
+
+.dark-mode table {
+    background-color: #333;
+    border-color: #defffc;
+}
+
+.dark-mode th, .dark-mode td {
+    border-bottom: 1px solid #defffc;
+}
+
+.dark-mode th {
+    background-color: #1a1a1a;
+    color: #defffc;
+}
+
+::selection
+ {
+    color: #fff;
+    background-color: #b12124;
+}
+
+a {   
+    color: red; 
+    text-decoration: none;  
+}
+a:visited {   
+    color: purple;   
+    text-decoration: none;
+}
+a:hover {   
+    color: black;  
+    text-decoration: underline; 
+}
+a:active {   
+    color: white;   
+    text-decoration: underline;
+}

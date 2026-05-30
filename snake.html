@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snake Game</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000222">
+  <meta name="apple-mobile-web-app-title" content="Ron Lab">
+  <meta name="application-name" content="Ron Lab">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <style>
+    html, body {
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      font-family: 'biome', sans-serif;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    
+    .canvas-container {
+      width: 600px;
+      height: 350px;
+      max-width: 85vw;
+      max-height: 45vh;
+      margin: 10px auto;
+      background-color: #ababab;
+      border: 2px solid black;
+      position: relative;
+    }
+    
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .title {
+      text-align: center;
+      color: black !important;
+      font-size: 40px !important;
+      font-weight: bold !important;
+      margin: 10px 0 !important;
+      display: block !important;
+      visibility: visible !important;
+    }
+    
+    .dark-mode .title {
+      color: white !important;
+    }
+    
+    .game-controls {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      max-width: 600px;
+      margin: 8px auto;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    
+    .score-display {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .power-up-status {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 5px;
+    }
+    
+    .power-up-indicator {
+      background: rgba(0,0,0,0.8);
+      color: white;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+      display: none;
+    }
+    
+    .power-up-indicator.active {
+      display: block;
+    }
+    
+    .dark-mode .power-up-indicator {
+      background: rgba(255,255,255,0.8);
+      color: black;
+    }
+    
+    #score, #highScore {
+      color: black;
+      font-size: 18px;
+      margin: 0;
+    }
+    
+    .dark-mode #score, .dark-mode #highScore {
+      color: white;
+    }
+    
+    .site-button {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+    
+    button, input[type="color"] {
+      font-family: 'biome', sans-serif;
+      padding: 8px 12px;
+      border: 1px solid #333;
+      background: #f0f0f0;
+      cursor: pointer;
+      touch-action: manipulation; /* Fix mobile touch responsiveness */
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    
+    button:hover, button:active {
+      background: #e0e0e0;
+    }
+    
+    button:active {
+      transform: translateY(1px);
+    }
+    
+    #colorInput {
+      width: 60px;
+      height: 40px;
+      padding: 2px;
+    }
+    
+    @media (max-width: 768px) {
+      .title {
+        font-size: 36px;
+      }
+      
+      .canvas-container {
+        width: 95vw;
+        height: 50vh;
+      }
+      
+      .game-controls {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+    
+    footer {
+      position: absolute;
+      bottom: 5px;
+      width: 100%;
+      text-align: center;
+      font-size: 12px;
+      color: #666;
+    }
+    
+    footer p {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+<header>
+    <h1 class="title">Snake</h1>
+</header>
+
+<main>
+  <div class="game-controls">
+    <a href="https://ronlab.site" class="site-button">
+      <img src="/favicon.ico" alt="Ron Lab" class="favicon">
+    </a>
+    
+    <div class="score-display">
+      <p id="score">Score: 0</p>
+      <p id="highScore">High Score: 0</p>
+      <div class="power-up-status">
+        <div id="slowdownIndicator" class="power-up-indicator" style="background-color: #00BFFF;">Slowdown: 0s</div>
+        <div id="invincibilityIndicator" class="power-up-indicator" style="background-color: #FFD700;">Invincible: 0s</div>
+        <div id="doublepointsIndicator" class="power-up-indicator" style="background-color: #FF69B4;">2x Points: 0s</div>
+      </div>
+    </div>
+    
+    <button id="backButton">Lab Links</button>
+    <button id="pausePlayButton">Pause</button>
+    <input type="color" id="colorInput" value="#00ff00" title="Snake Color">
+    <button id="difficultyButton" class="difficulty-button">Easy</button>
+  </div>
+
+  <div class="canvas-container">
+    <canvas id="game"></canvas>
+  </div>
+
+  <script>
+    // Game variables
+    var snakeColor = '#00ff00';
+    var canvas = document.getElementById('game');
+    var context = canvas.getContext('2d');
+    var score = 0;
+    var highScores = { Easy: 0, Medium: 0, Hard: 0 };
+    var gamePaused = false;
+    var grid = 20;
+    var count = 0;
+    var gameSpeed = 4;
+    var difficulty = 'Easy';
+    var lastTime = 0;
+    
+    var snake = {
+      x: 0,
+      y: 0,
+      dx: grid,
+      dy: 0,
+      cells: [],
+      maxCells: 4
+    };
+    
+    var apple = {
+      x: 0,
+      y: 0,
+      type: 'normal',
+      scale: 1.0,
+      rotation: 0
+    };
+
+    // Graphics and animation system
+    var particles = [];
+    var smoothMovement = {
+      enabled: true,
+      progress: 0
+    };
+
+    // Power-up system
+    var powerUps = {
+      slowdown: { active: false, timeLeft: 0, color: '#00BFFF' },
+      invincibility: { active: false, timeLeft: 0, color: '#FFD700' },
+      doublepoints: { active: false, timeLeft: 0, color: '#FF69B4' }
+    };
+    var powerUpDuration = 10000; // 10 seconds
+    var powerUpChance = 0.15; // 15% chance
+
+    // Touch controls
+    var touchStartX = 0;
+    var touchStartY = 0;
+    var minSwipeDistance = 30;
+
+    // Add polyfill for roundRect if not supported
+    if (!CanvasRenderingContext2D.prototype.roundRect) {
+      CanvasRenderingContext2D.prototype.roundRect = function(x, y, width, height, radius) {
+        this.beginPath();
+        this.moveTo(x + radius, y);
+        this.lineTo(x + width - radius, y);
+        this.quadraticCurveTo(x + width, y, x + width, y + radius);
+        this.lineTo(x + width, y + height - radius);
+        this.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+        this.lineTo(x + radius, y + height);
+        this.quadraticCurveTo(x, y + height, x, y + height - radius);
+        this.lineTo(x, y + radius);
+        this.quadraticCurveTo(x, y, x + radius, y);
+        this.closePath();
+      };
+    }
+
+    // Utility functions
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min)) + min;
+    }
+
+    // Particle system for collection effects
+    function createParticles(x, y, color, count) {
+      for (var i = 0; i < count; i++) {
+        particles.push({
+          x: x + canvas.offsetX + grid/2,
+          y: y + canvas.offsetY + grid/2,
+          vx: (Math.random() - 0.5) * 8,
+          vy: (Math.random() - 0.5) * 8,
+          life: 1.0,
+          decay: Math.random() * 0.02 + 0.01,
+          size: Math.random() * 4 + 2,
+          color: color
+        });
+      }
+    }
+
+    function updateParticles() {
+      for (var i = particles.length - 1; i >= 0; i--) {
+        var p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vx *= 0.98;
+        p.vy *= 0.98;
+        p.life -= p.decay;
+        
+        if (p.life <= 0) {
+          particles.splice(i, 1);
+        }
+      }
+    }
+
+    function drawParticles() {
+      for (var i = 0; i < particles.length; i++) {
+        var p = particles[i];
+        context.save();
+        context.globalAlpha = p.life;
+        context.fillStyle = p.color;
+        context.beginPath();
+        context.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+        context.fill();
+        context.restore();
+      }
+    }
+
+    // Snake drawing functions
+    function drawSnakeHead(x, y, dx, dy) {
+      var centerX = x + canvas.offsetX + grid/2;
+      var centerY = y + canvas.offsetY + grid/2;
+      
+      context.save();
+      context.fillStyle = snakeColor;
+      
+      // Draw head as rounded rectangle
+      context.beginPath();
+      context.roundRect(x + canvas.offsetX + 1, y + canvas.offsetY + 1, grid - 2, grid - 2, 6);
+      context.fill();
+      
+      // Draw eyes based on direction
+      context.fillStyle = '#000';
+      var eyeSize = 2;
+      var eyeOffset = 4;
+      
+      if (dx > 0) { // Moving right
+        context.fillRect(centerX + eyeOffset - eyeSize, centerY - eyeOffset, eyeSize, eyeSize);
+        context.fillRect(centerX + eyeOffset - eyeSize, centerY + eyeOffset - eyeSize, eyeSize, eyeSize);
+      } else if (dx < 0) { // Moving left
+        context.fillRect(centerX - eyeOffset, centerY - eyeOffset, eyeSize, eyeSize);
+        context.fillRect(centerX - eyeOffset, centerY + eyeOffset - eyeSize, eyeSize, eyeSize);
+      } else if (dy > 0) { // Moving down
+        context.fillRect(centerX - eyeOffset, centerY + eyeOffset - eyeSize, eyeSize, eyeSize);
+        context.fillRect(centerX + eyeOffset - eyeSize, centerY + eyeOffset - eyeSize, eyeSize, eyeSize);
+      } else if (dy < 0) { // Moving up
+        context.fillRect(centerX - eyeOffset, centerY - eyeOffset, eyeSize, eyeSize);
+        context.fillRect(centerX + eyeOffset - eyeSize, centerY - eyeOffset, eyeSize, eyeSize);
+      }
+      
+      context.restore();
+    }
+
+    function drawSnakeBody(x, y, index, total) {
+      var size = grid - 2;
+      var alpha = Math.max(0.6, 1 - (index / total) * 0.4); // Fade towards tail
+      
+      context.save();
+      context.globalAlpha = alpha;
+      context.fillStyle = snakeColor;
+      
+      // Draw body segment with slight rounding
+      context.beginPath();
+      context.roundRect(x + canvas.offsetX + 1, y + canvas.offsetY + 1, size, size, 3);
+      context.fill();
+      context.restore();
+    }
+
+    // Apple functions
+    function getAppleColor() {
+      switch(apple.type) {
+        case 'slowdown': return powerUps.slowdown.color;
+        case 'invincibility': return powerUps.invincibility.color;
+        case 'doublepoints': return powerUps.doublepoints.color;
+        default: return 'red';
+      }
+    }
+
+    function drawAnimatedApple() {
+      apple.scale = 1.0 + Math.sin(Date.now() * 0.005) * 0.1;
+      apple.rotation += 0.02;
+      
+      var centerX = apple.x + canvas.offsetX + grid/2;
+      var centerY = apple.y + canvas.offsetY + grid/2;
+      var size = (grid - 2) * apple.scale;
+      
+      context.save();
+      context.translate(centerX, centerY);
+      context.rotate(apple.rotation);
+      context.fillStyle = getAppleColor();
+      
+      // Draw apple with pulsing animation
+      context.beginPath();
+      context.roundRect(-size/2, -size/2, size, size, size * 0.2);
+      context.fill();
+      
+      // Add shine effect for power-up apples
+      if (apple.type !== 'normal') {
+        context.fillStyle = 'rgba(255,255,255,0.3)';
+        context.beginPath();
+        context.roundRect(-size/2 + 2, -size/2 + 2, size * 0.4, size * 0.4, size * 0.1);
+        context.fill();
+      }
+      
+      context.restore();
+    }
+
+    function generateApple() {
+      var cols = Math.floor(canvas.playableWidth / grid);
+      var rows = Math.floor(canvas.playableHeight / grid);
+      
+      apple.x = getRandomInt(0, cols) * grid;
+      apple.y = getRandomInt(0, rows) * grid;
+      
+      // Determine apple type
+      if (Math.random() < powerUpChance) {
+        var powerUpTypes = ['slowdown', 'invincibility', 'doublepoints'];
+        apple.type = powerUpTypes[getRandomInt(0, powerUpTypes.length)];
+      } else {
+        apple.type = 'normal';
+      }
+    }
+
+    // Power-up functions
+    function activatePowerUp(type) {
+      if (type === 'normal') return;
+      
+      if (powerUps[type]) {
+        powerUps[type].active = true;
+        powerUps[type].timeLeft = powerUpDuration;
+      }
+      
+      updatePowerUpDisplay();
+    }
+
+    function updatePowerUps(deltaTime) {
+      for (var type in powerUps) {
+        if (powerUps[type].active) {
+          powerUps[type].timeLeft -= deltaTime;
+          if (powerUps[type].timeLeft <= 0) {
+            powerUps[type].active = false;
+            powerUps[type].timeLeft = 0;
+          }
+        }
+      }
+      updatePowerUpDisplay();
+    }
+
+    function updatePowerUpDisplay() {
+      var slowdownEl = document.getElementById('slowdownIndicator');
+      var invincibilityEl = document.getElementById('invincibilityIndicator');
+      var doublepointsEl = document.getElementById('doublepointsIndicator');
+      
+      if (powerUps.slowdown.active) {
+        slowdownEl.classList.add('active');
+        slowdownEl.textContent = 'Slowdown: ' + Math.ceil(powerUps.slowdown.timeLeft / 1000) + 's';
+      } else {
+        slowdownEl.classList.remove('active');
+      }
+      
+      if (powerUps.invincibility.active) {
+        invincibilityEl.classList.add('active');
+        invincibilityEl.textContent = 'Invincible: ' + Math.ceil(powerUps.invincibility.timeLeft / 1000) + 's';
+      } else {
+        invincibilityEl.classList.remove('active');
+      }
+      
+      if (powerUps.doublepoints.active) {
+        doublepointsEl.classList.add('active');
+        doublepointsEl.textContent = '2x Points: ' + Math.ceil(powerUps.doublepoints.timeLeft / 1000) + 's';
+      } else {
+        doublepointsEl.classList.remove('active');
+      }
+    }
+
+    function getCurrentGameSpeed() {
+      if (powerUps.slowdown.active) {
+        return gameSpeed * 2;
+      }
+      return gameSpeed;
+    }
+
+    // Touch control functions
+    function handleTouchStart(event) {
+      event.preventDefault();
+      var touch = event.touches[0];
+      var target = document.elementFromPoint(touch.clientX, touch.clientY);
+      
+      // Check if touch is on a button
+      if (target && (target.tagName === 'BUTTON' || target.tagName === 'INPUT')) {
+        target.click();
+        return;
+      }
+      
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+    }
+
+    function handleTouchMove(event) {
+      event.preventDefault();
+      if (event.touches.length === 0) return;
+      
+      var touchX = event.touches[0].clientX;
+      var touchY = event.touches[0].clientY;
+      var deltaX = touchX - touchStartX;
+      var deltaY = touchY - touchStartY;
+
+      if (Math.abs(deltaX) > minSwipeDistance || Math.abs(deltaY) > minSwipeDistance) {
+        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+          if (deltaX > 0 && snake.dx === 0) {
+            snake.dx = grid;
+            snake.dy = 0;
+          } else if (deltaX < 0 && snake.dx === 0) {
+            snake.dx = -grid;
+            snake.dy = 0;
+          }
+        } else {
+          if (deltaY > 0 && snake.dy === 0) {
+            snake.dy = grid;
+            snake.dx = 0;
+          } else if (deltaY < 0 && snake.dy === 0) {
+            snake.dy = -grid;
+            snake.dx = 0;
+          }
+        }
+        touchStartX = touchX;
+        touchStartY = touchY;
+      }
+    }
+
+    // Game management functions
+    function resizeCanvas() {
+      var container = document.querySelector('.canvas-container');
+      var containerWidth = container.clientWidth;
+      var containerHeight = container.clientHeight;
+      
+      canvas.width = containerWidth;
+      canvas.height = containerHeight;
+      
+      var cols = Math.floor(containerWidth / grid);
+      var rows = Math.floor(containerHeight / grid);
+      
+      var playableWidth = cols * grid;
+      var playableHeight = rows * grid;
+      
+      canvas.playableWidth = playableWidth;
+      canvas.playableHeight = playableHeight;
+      canvas.offsetX = (containerWidth - playableWidth) / 2;
+      canvas.offsetY = (containerHeight - playableHeight) / 2;
+      
+      resetGame();
+    }
+
+    function resetGame() {
+      var cols = Math.floor(canvas.playableWidth / grid);
+      var rows = Math.floor(canvas.playableHeight / grid);
+      
+      snake.x = Math.floor(cols / 2) * grid;
+      snake.y = Math.floor(rows / 2) * grid;
+      snake.cells = [];
+      snake.maxCells = 4;
+      snake.dx = grid;
+      snake.dy = 0;
+      
+      // Reset power-ups
+      for (var type in powerUps) {
+        powerUps[type].active = false;
+        powerUps[type].timeLeft = 0;
+      }
+      
+      generateApple();
+      score = 0;
+      
+      updateScoreDisplay();
+      updatePowerUpDisplay();
+    }
+
+    function updateScoreDisplay() {
+      document.getElementById('score').textContent = 'Score: ' + score;
+      document.getElementById('highScore').textContent = 'High Score (' + difficulty + '): ' + highScores[difficulty];
+    }
+
+    function togglePausePlay() {
+      gamePaused = !gamePaused;
+      document.getElementById('pausePlayButton').textContent = gamePaused ? 'Play' : 'Pause';
+      if (!gamePaused) {
+        lastTime = performance.now();
+        requestAnimationFrame(loop);
+      }
+    }
+
+    function changeDifficulty() {
+      if (difficulty === 'Easy') {
+        difficulty = 'Medium';
+        gameSpeed = 2;
+      } else if (difficulty === 'Medium') {
+        difficulty = 'Hard';
+        gameSpeed = 1;
+      } else {
+        difficulty = 'Easy';
+        gameSpeed = 4;
+      }
+      
+      document.getElementById('difficultyButton').textContent = difficulty;
+      updateScoreDisplay(); // Update display to show new difficulty high score
+      
+      if (typeof Storage !== 'undefined') {
+        localStorage.setItem('gameDifficulty', difficulty);
+        localStorage.setItem('gameSpeed', gameSpeed);
+        localStorage.setItem('highScores', JSON.stringify(highScores));
+      }
+    }
+
+    // Main game loop
+    function loop(currentTime) {
+      if (!gamePaused) {
+        requestAnimationFrame(loop);
+        
+        if (!lastTime) lastTime = currentTime;
+        var deltaTime = currentTime - lastTime;
+        lastTime = currentTime;
+        
+        // Update power-ups
+        updatePowerUps(deltaTime);
+        
+        if (++count < getCurrentGameSpeed()) return;
+        count = 0;
+        
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Update smooth movement progress
+        smoothMovement.progress = Math.min(1, (count + 1) / getCurrentGameSpeed());
+        
+        snake.x += snake.dx;
+        snake.y += snake.dy;
+        
+        var cols = Math.floor(canvas.playableWidth / grid);
+        var rows = Math.floor(canvas.playableHeight / grid);
+        
+        if (snake.x < 0) {
+          snake.x = (cols - 1) * grid;
+        } else if (snake.x >= cols * grid) {
+          snake.x = 0;
+        }
+        if (snake.y < 0) {
+          snake.y = (rows - 1) * grid;
+        } else if (snake.y >= rows * grid) {
+          snake.y = 0;
+        }
+        
+        snake.cells.unshift({ x: snake.x, y: snake.y });
+        if (snake.cells.length > snake.maxCells) {
+          snake.cells.pop();
+        }
+        
+        // Update and draw particles
+        updateParticles();
+        
+        // Draw animated apple
+        drawAnimatedApple();
+        
+        // Draw snake with head/body differentiation and smooth movement
+        var isFlashing = powerUps.invincibility.active && Math.floor(currentTime / 200) % 2;
+        if (isFlashing) {
+          snakeColor = '#FFFFFF';
+        } else {
+          snakeColor = document.getElementById('colorInput').value;
+        }
+        
+        for (var i = 0; i < snake.cells.length; i++) {
+          var cell = snake.cells[i];
+          
+          if (i === 0) {
+            // Draw snake head
+            drawSnakeHead(cell.x, cell.y, snake.dx, snake.dy);
+          } else {
+            // Draw snake body with fading effect
+            drawSnakeBody(cell.x, cell.y, i, snake.cells.length);
+          }
+          
+          // Check if snake ate apple
+          if (cell.x === apple.x && cell.y === apple.y) {
+            snake.maxCells++;
+            
+            // Create collection particles
+            var particleColor = getAppleColor();
+            var particleCount = apple.type === 'normal' ? 6 : 12;
+            createParticles(apple.x, apple.y, particleColor, particleCount);
+            
+            // Calculate points
+            var points = 1;
+            if (powerUps.doublepoints.active) {
+              points *= 2;
+            }
+            if (apple.type === 'doublepoints') {
+              points *= 2;
+            }
+            
+            score += points;
+            
+            // Activate power-up
+            activatePowerUp(apple.type);
+            
+            generateApple();
+            
+            if (score > highScores[difficulty]) {
+              highScores[difficulty] = score;
+              if (typeof Storage !== 'undefined') {
+                localStorage.setItem('highScores', JSON.stringify(highScores));
+              }
+            }
+            
+            updateScoreDisplay();
+          }
+          
+          // Check self-collision (unless invincible)
+          if (!powerUps.invincibility.active) {
+            for (var j = i + 1; j < snake.cells.length; j++) {
+              if (cell.x === snake.cells[j].x && cell.y === snake.cells[j].y) {
+                resetGame();
+                return;
+              }
+            }
+          }
+        }
+        
+        // Draw particles on top
+        drawParticles();
+      }
+    }
+
+    // Event listeners
+    document.addEventListener('keydown', function(e) {
+      if (e.which === 37 && snake.dx === 0) {
+        snake.dx = -grid;
+        snake.dy = 0;
+      } else if (e.which === 38 && snake.dy === 0) {
+        snake.dy = -grid;
+        snake.dx = 0;
+      } else if (e.which === 39 && snake.dx === 0) {
+        snake.dx = grid;
+        snake.dy = 0;
+      } else if (e.which === 40 && snake.dy === 0) {
+        snake.dy = grid;
+        snake.dx = 0;
+      }
+    });
+
+    document.addEventListener('touchstart', handleTouchStart, { passive: false });
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof Storage !== 'undefined') {
+        var isDarkMode = localStorage.getItem('darkMode');
+        var body = document.body;
+        
+        if (isDarkMode === 'enabled') {
+          body.classList.add('dark-mode');
+        }
+      }
+    });
+
+    document.getElementById('pausePlayButton').addEventListener('click', togglePausePlay);
+    document.getElementById('difficultyButton').addEventListener('click', changeDifficulty);
+    document.getElementById('backButton').addEventListener('click', function() {
+      window.location.href = 'https://ronlab.site/links.html';
+    });
+    document.getElementById('colorInput').addEventListener('input', function(event) {
+      snakeColor = event.target.value;
+    });
+
+    // Initialize game
+    window.addEventListener('resize', resizeCanvas);
+    
+    if (typeof Storage !== 'undefined') {
+      // Load high scores from storage
+      var storedHighScores = localStorage.getItem('highScores');
+      if (storedHighScores) {
+        try {
+          highScores = JSON.parse(storedHighScores);
+          // Ensure all difficulties have a score
+          if (!highScores.Easy) highScores.Easy = 0;
+          if (!highScores.Medium) highScores.Medium = 0;
+          if (!highScores.Hard) highScores.Hard = 0;
+        } catch (e) {
+          // If parsing fails, use defaults
+          highScores = { Easy: 0, Medium: 0, Hard: 0 };
+        }
+      }
+      
+      difficulty = localStorage.getItem('gameDifficulty') || 'Easy';
+      gameSpeed = parseInt(localStorage.getItem('gameSpeed')) || 4;
+    } else {
+      highScores = { Easy: 0, Medium: 0, Hard: 0 };
+      difficulty = 'Easy';
+      gameSpeed = 4;
+    }
+    
+    document.getElementById('difficultyButton').textContent = difficulty;
+    
+    updateScoreDisplay();
+    resizeCanvas();
+    lastTime = performance.now();
+    requestAnimationFrame(loop);
+  </script>
+</main>
+
+<footer>
+    <p>&copy; 2023 ron</p>
+</footer>
+
+</body>
+</html>
