@@ -195,7 +195,6 @@
       </div>
     </div>
     
-    <button id="backButton">Lab Links</button>
     <button id="pausePlayButton">Pause</button>
     <input type="color" id="colorInput" value="#00ff00" title="Snake Color">
     <button id="difficultyButton" class="difficulty-button">Easy</button>
@@ -769,9 +768,7 @@
 
     document.getElementById('pausePlayButton').addEventListener('click', togglePausePlay);
     document.getElementById('difficultyButton').addEventListener('click', changeDifficulty);
-    document.getElementById('backButton').addEventListener('click', function() {
-      window.location.href = 'https://ronlab.site/links.html';
-    });
+    
     document.getElementById('colorInput').addEventListener('input', function(event) {
       snakeColor = event.target.value;
     });
