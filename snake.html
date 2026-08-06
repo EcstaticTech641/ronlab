@@ -46,18 +46,11 @@
       height: 100%;
     }
     
-    .title {
+    .back-link {
+      display: block;
       text-align: center;
-      color: black !important;
-      font-size: 40px !important;
-      font-weight: bold !important;
-      margin: 10px 0 !important;
-      display: block !important;
-      visibility: visible !important;
-    }
-    
-    .dark-mode .title {
-      color: white !important;
+      margin: 10px 0;
+      font-size: 0.95rem;
     }
     
     .game-controls {
@@ -113,12 +106,6 @@
       color: white;
     }
     
-    .site-button {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-    }
-    
     button, input[type="color"] {
       font-family: 'biome', sans-serif;
       padding: 8px 12px;
@@ -145,10 +132,6 @@
     }
     
     @media (max-width: 768px) {
-      .title {
-        font-size: 36px;
-      }
-      
       .canvas-container {
         width: 95vw;
         height: 50vh;
@@ -177,14 +160,15 @@
 <body>
 <header>
     <img src="/favicon-32x32.png" alt="Ron Lab Logo" class="header-logo">
-    <h1 class="title">Snake</h1>
+    <h1>Snake Game</h1>
 </header>
 
 <main>
+  <div class="back-link">
+    <a href="games.html">← Back to Games</a> | <a href="index.html">Home</a>
+  </div>
+
   <div class="game-controls">
-    <a href="https://ronlab.site" class="site-button">
-      <img src="/favicon.ico" alt="Ron Lab" class="favicon">
-    </a>
     
     <div class="score-display">
       <p id="score">Score: 0</p>

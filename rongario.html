@@ -20,82 +20,68 @@
     <style>
         body { 
             margin: 0; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh; 
+            padding: 0; 
+            text-align: center;
         }
-h1 {
-	color: #fff;
-  padding 10px;
-   text-align: center;
-  height: 100px; /* Adjust the height as needed */
-  margin: 0; /* Remove any default margin */
-  font-family: 'biome', sans-serif;
-}
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
         #scoreDisplay {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin-bottom: 10px;
-            font-family: Arial, sans-serif;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-family: 'biome', sans-serif;
             color: #333;
         }
+
         #scoreDisplay span {
             background: #fff;
-            padding: 5px 10px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 8px 14px;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            font-weight: 500;
+            border: 1px solid #ddd;
         }
+
+        .dark-mode #scoreDisplay span {
+            background-color: #1a1a1a;
+            color: #defffc;
+            border-color: #444;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+        }
+
         canvas { 
-            border: 2px solid #333;
-	    background: #fff;
+            border: 3px solid #000222;
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            max-width: 95vw;
         }
+
+        .dark-mode canvas {
+            border-color: #defffc;
+            box-shadow: 0 4px 15px rgba(222, 255, 252, 0.15);
+        }
+
         #colorPicker {
-            margin-top: 10px;
+            margin-top: 15px;
+            width: 220px;
         }
-        input[type=range] {
-            -webkit-appearance: none;
-            width: 200px;
-            height: 8px;
-            background: #ddd; /* Neutral grey track */
-            border-radius: 5px;
-            outline: none;
-        }
-        input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #666; /* Neutral grey thumb */
-            cursor: pointer;
-        }
-        input[type=range]::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #666; /* Neutral grey thumb */
-            cursor: pointer;
-        }
-
-/* Style for the Site button */
-.site-button {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    position: absolute;
-  top: 03%; /* Adjust the top position as needed */
-  left: 03%;
-  transform: translateX(-50%, 50%);
-}
-
-#backButton {
-  position: absolute;
-  top: 04%; /* Adjust the top position as needed */
-  left: 09%;
-  transform: translateX(-20%, -50%);
-}
     </style>
 </head>
 <body>
@@ -104,18 +90,20 @@ h1 {
         <h1>Rongario</h1>
     </header>
 
-<a href="https://ronlab.site" class="site-button">
-    <img src="/favicon.ico" alt="Ron Lab" class="favicon">   
-</a>
+    <main class="content-container">
+        <div class="back-link">
+            <a href="games.html">← Back to Games</a> | <a href="index.html">Home</a>
+        </div>
 
-    <div id="scoreDisplay">
-        <span id="totalPoints">Total Points: 0</span>
-        <span id="currentPoints">Current Points: 0</span>
-        <span id="botsAbsorbed">Bots Absorbed: 0</span>
-        <span id="highScore">High Score: 0</span>
-    </div>
-    <canvas id="gameCanvas" width="800" height="600"></canvas>
-    <input type="range" id="colorPicker" min="0" max="360" value="240" step="1">
+        <div id="scoreDisplay">
+            <span id="totalPoints">Total Points: 0</span>
+            <span id="currentPoints">Current Points: 0</span>
+            <span id="botsAbsorbed">Bots Absorbed: 0</span>
+            <span id="highScore">High Score: 0</span>
+        </div>
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+        <input type="range" id="colorPicker" min="0" max="360" value="240" step="1">
+    </main>
     <script>
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
