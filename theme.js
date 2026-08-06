@@ -1,5 +1,5 @@
 /**
- * RonLab Centralized Theme & Dark Mode Controller
+ * RonLab Centralized Theme & Footer Controller
  */
 (function () {
     function applyTheme() {
@@ -19,6 +19,11 @@
 
     document.addEventListener('DOMContentLoaded', () => {
         applyTheme();
+
+        const yearEl = document.getElementById('year');
+        if (yearEl) {
+            yearEl.textContent = new Date().getFullYear();
+        }
 
         const darkModeToggle = document.getElementById('darkModeToggle');
         if (darkModeToggle) {

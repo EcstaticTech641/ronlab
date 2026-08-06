@@ -21,14 +21,17 @@
 
 </head>
 <body>
-    <div class="container">
+    <header>
+        <img src="/favicon-32x32.png" alt="Ron Lab Logo" class="header-logo">
         <h1>502 - Bad Gateway</h1>
-        <p>The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
-        <li><a href="https://status.ronlab.site">Check Site Status</a></li>
-        <a href="/">Go to the Home Page</a>
-    </div>
+    </header>
+    <main class="content-container" style="text-align: center; padding: 40px 20px;">
+        <p style="font-size: 1.1rem; line-height: 1.6;">The service you are looking for is currently unreachable or undergoing maintenance.</p>
+        <p style="margin-top: 20px;"><a href="https://status.ronlab.site" class="btn" target="_blank" rel="noopener noreferrer">Check Site Status</a></p>
+    </main>
     <footer>
-        <p>&copy; 2023 ron</p>
+        <p>&copy; 2023–<span id="year"></span> ron</p>
+        <p><a href="sitemap.html">Sitemap</a> | <a href="index.html">Back to Home</a></p>
     </footer>
     <script src="/theme.js"></script>
 </body>

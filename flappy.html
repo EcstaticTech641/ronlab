@@ -76,6 +76,7 @@
 </head>
 <body>
     <header>
+        <img src="/favicon-32x32.png" alt="Ron Lab Logo" class="header-logo">
         <h1>Flappy Bird</h1>
     </header>
 
@@ -90,13 +91,12 @@
 
     <footer>
         <p>&copy; 2023–<span id="year"></span> ron</p>
+        <p><a href="sitemap.html">Sitemap</a> | <a href="index.html">Back to Home</a></p>
     </footer>
 
     <button id="darkModeToggle">Toggle Dark Mode</button>
 
     <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-
         var myCanvas = document.getElementById("myCanvas");
         var ctx = myCanvas.getContext("2d");
         var FPS = 40;
