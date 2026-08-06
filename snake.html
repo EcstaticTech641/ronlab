@@ -755,17 +755,6 @@
     document.addEventListener('touchstart', handleTouchStart, { passive: false });
     document.addEventListener('touchmove', handleTouchMove, { passive: false });
 
-    document.addEventListener('DOMContentLoaded', function() {
-      if (typeof Storage !== 'undefined') {
-        var isDarkMode = localStorage.getItem('darkMode');
-        var body = document.body;
-        
-        if (isDarkMode === 'enabled') {
-          body.classList.add('dark-mode');
-        }
-      }
-    });
-
     document.getElementById('pausePlayButton').addEventListener('click', togglePausePlay);
     document.getElementById('difficultyButton').addEventListener('click', changeDifficulty);
     
@@ -812,6 +801,7 @@
 <footer>
     <p>&copy; 2023 ron</p>
 </footer>
+<script src="/theme.js"></script>
 
 </body>
 </html>

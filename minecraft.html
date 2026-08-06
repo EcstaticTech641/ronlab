@@ -510,6 +510,7 @@
 
     <button id="darkModeToggle">Toggle Dark Mode</button>
 
+    <script src="/theme.js"></script>
     <script>
         // Set current year in footer
         document.getElementById('year').textContent = new Date().getFullYear();
@@ -552,30 +553,6 @@
                     document.body.removeChild(textarea);
                 }
             });
-        });
-
-        // Dark mode toggle
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        const body = document.body;
-
-        darkModeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-
-            const isDarkMode = body.classList.contains('dark-mode');
-            if (isDarkMode) {
-                localStorage.setItem('darkMode', 'enabled');
-            } else {
-                localStorage.setItem('darkMode', 'disabled');
-            }
-        });
-
-        // Apply dark mode status on load
-        document.addEventListener('DOMContentLoaded', () => {
-            const isDarkMode = localStorage.getItem('darkMode');
-
-            if (isDarkMode === 'enabled') {
-                body.classList.add('dark-mode');
-            }
         });
     </script>
 

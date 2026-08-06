@@ -1,0 +1,211 @@
+[
+  {
+    "id": "jellyfin",
+    "title": "Jellyfin",
+    "description": "Media server for ron's personal collection of home videos.",
+    "url": "https://movie.ronlab.site",
+    "category": "Services",
+    "type": "subdomain",
+    "show_in_sitemap": true,
+    "metadata": {}
+  },
+  {
+    "id": "emu",
+    "title": "Retro Games",
+    "description": "Private retro game collection.",
+    "url": "https://emu.ronlab.site",
+    "category": "Services",
+    "type": "subdomain",
+    "show_in_sitemap": true,
+    "metadata": {}
+  },
+  {
+    "id": "requests",
+    "title": "Requests",
+    "description": "Jellyfin request portal.",
+    "url": "https://request.ronlab.site",
+    "category": "Services",
+    "type": "subdomain",
+    "show_in_sitemap": true,
+    "metadata": {}
+  },
+  {
+    "id": "files",
+    "title": "Files",
+    "description": "Cloud storage for accessing and sharing files across all your devices.",
+    "url": "https://cloud.ronlab.site",
+    "category": "Services",
+    "type": "subdomain",
+    "show_in_sitemap": true,
+    "metadata": {}
+  },
+  {
+    "id": "wiki",
+    "title": "Wiki",
+    "description": "Knowledge base for documentation and collaborative information sharing.",
+    "url": "https://wiki.ronlab.site",
+    "category": "Services",
+    "type": "subdomain",
+    "show_in_sitemap": true,
+    "metadata": {}
+  },
+  {
+    "id": "mc-status",
+    "title": "Server Status",
+    "description": "Check the status of all Minecraft servers. View player counts and server information.",
+    "url": "https://crafty.ronlab.site/status",
+    "category": "Minecraft",
+    "type": "subdomain",
+    "show_in_sitemap": true,
+    "metadata": {
+      "mc_status_badge": "Active"
+    }
+  },
+  {
+    "id": "mc-addresses",
+    "title": "Server Addresses",
+    "description": "MultiMode Java & Bedrock, Survival, and Modded servers.",
+    "url": "/minecraft.html",
+    "category": "Minecraft",
+    "type": "internal",
+    "show_in_sitemap": true,
+    "metadata": {}
+  },
+  {
+    "id": "mc-map",
+    "title": "Map",
+    "description": "Minecraft Vanilla Server map. Explore and visualize your world.",
+    "url": "https://map.ronlab.site",
+    "category": "Minecraft",
+    "type": "subdomain",
+    "show_in_sitemap": true,
+    "metadata": {}
+  },
+  {
+    "id": "mc-multimode-java",
+    "title": "MultiMode Java",
+    "description": "Latest version Java server with multi-mode gameplay support and testing features.",
+    "url": "mc.ronlab.site",
+    "category": "Minecraft Servers",
+    "type": "minecraft_server",
+    "show_in_sitemap": false,
+    "metadata": {
+      "mc_address": "mc.ronlab.site",
+      "mc_version": "1.21.11",
+      "mc_status_badge": "Testing"
+    }
+  },
+  {
+    "id": "mc-multimode-bedrock",
+    "title": "MultiMode Bedrock",
+    "description": "Cross-platform Bedrock server with multi-mode support for mobile and console players.",
+    "url": "ronlab.site:19132",
+    "category": "Minecraft Servers",
+    "type": "minecraft_server",
+    "show_in_sitemap": false,
+    "metadata": {
+      "mc_address": "ronlab.site",
+      "mc_port": "19132",
+      "mc_version": "1.21.11",
+      "mc_status_badge": "Testing"
+    }
+  },
+  {
+    "id": "mc-survival-java",
+    "title": "Survival Java",
+    "description": "Long-running survival server with established world and community. Build and explore together.",
+    "url": "craft.ronlab.site",
+    "category": "Minecraft Servers",
+    "type": "minecraft_server",
+    "show_in_sitemap": false,
+    "metadata": {
+      "mc_address": "craft.ronlab.site",
+      "mc_version": "26.1",
+      "mc_status_badge": "Active"
+    }
+  },
+  {
+    "id": "mc-java-forge",
+    "title": "Java Forge",
+    "description": "Modded Java server with custom mod pack. Server currently paused for maintenance.",
+    "url": "mod.ronlab.site",
+    "category": "Minecraft Servers",
+    "type": "minecraft_server",
+    "show_in_sitemap": false,
+    "metadata": {
+      "mc_address": "mod.ronlab.site",
+      "mc_version": "Modpack",
+      "mc_status_badge": "Offline"
+    }
+  },
+  {
+    "id": "snake",
+    "title": "Snake",
+    "description": "Classic snake game. Navigate and grow your snake without hitting walls or yourself.",
+    "url": "/snake.html",
+    "category": "Games & Experimental",
+    "type": "internal",
+    "show_in_sitemap": true,
+    "metadata": {}
+  },
+  {
+    "id": "flappy",
+    "title": "Flappy Bird",
+    "description": "Flappy Bird in your browser",
+    "url": "/flappy.html",
+    "category": "Games & Experimental",
+    "type": "internal",
+    "show_in_sitemap": true,
+    "metadata": {}
+  },
+  {
+    "id": "rongario",
+    "title": "Rongario",
+    "description": "Totally not Agar.io",
+    "url": "/rongario.html",
+    "category": "Games & Experimental",
+    "type": "internal",
+    "show_in_sitemap": true,
+    "metadata": {}
+  },
+  {
+    "id": "discord-color-engine",
+    "title": "Discord Color Engine",
+    "description": "Tool for creating and exploring Discord color themes.",
+    "url": "/discord.html",
+    "category": "Games & Experimental",
+    "type": "internal",
+    "show_in_sitemap": true,
+    "metadata": {}
+  },
+  {
+    "id": "modpack",
+    "title": "Ron Lab Modpack",
+    "description": "Curated collection of mods for an enhanced Minecraft experience.",
+    "url": "https://drive.google.com/drive/folders/1ktByD3DAhQ_q4QXqc3JjcEOgUtWaC5j9?usp=sharing",
+    "category": "Other",
+    "type": "external",
+    "show_in_sitemap": true,
+    "metadata": {}
+  },
+  {
+    "id": "request-form",
+    "title": "Request Form",
+    "description": "Have a feature request or suggestion? Submit your ideas here.",
+    "url": "https://forms.gle/BwYJrXEqpxPvxcif6",
+    "category": "Other",
+    "type": "external",
+    "show_in_sitemap": true,
+    "metadata": {}
+  },
+  {
+    "id": "status-page",
+    "title": "Status",
+    "description": "Real-time monitoring and status of all RonLab services.",
+    "url": "https://status.ronlab.site",
+    "category": "Other",
+    "type": "subdomain",
+    "show_in_sitemap": true,
+    "metadata": {}
+  }
+]

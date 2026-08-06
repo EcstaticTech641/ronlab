@@ -15,7 +15,6 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <script src="script.js"></script>
 </head>
 <body>
     <header>
@@ -32,8 +31,7 @@
                         <th>URL</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr><td>Discord</td><td>Copy of Redbanes Color Generator</td><td><a href="/discord.html">/discord.html</a></td></tr><tr><td>Flappy</td><td>Page in the ronlab site</td><td><a href="/flappy.html">/flappy.html</a></td></tr><tr><td>Games</td><td>Page in the ronlab site</td><td><a href="/games.html">/games.html</a></td></tr><tr><td>Index</td><td>Main landing page</td><td><a href="/index.html">/index.html</a></td></tr><tr><td>Minecraft</td><td>Page in the ronlab site</td><td><a href="/minecraft.html">/minecraft.html</a></td></tr><tr><td>Rongario</td><td>Page in the ronlab site</td><td><a href="/rongario.html">/rongario.html</a></td></tr><tr><td>Sitemap</td><td>Site map of all pages</td><td><a href="/sitemap.html">/sitemap.html</a></td></tr><tr><td>Snake</td><td>Page in the ronlab site</td><td><a href="/snake.html">/snake.html</a></td></tr>
+                <tbody id="dynamic-sitemap-table">
                 </tbody>
             </table>
         </section>
@@ -41,17 +39,7 @@
     <footer>
         <p>&copy; 2023 ron</p>
     </footer>
+    <script src="/theme.js"></script>
+    <script src="/app.js"></script>
 </body>
-<script>
-        // JavaScript code to retrieve and apply dark mode status
-        document.addEventListener('DOMContentLoaded', () => {
-            const isDarkMode = localStorage.getItem('darkMode');
-            const body = document.body;
-
-            // Check if dark mode status exists and apply it
-            if (isDarkMode === 'enabled') {
-                body.classList.add('dark-mode');
-            }
-        });
-</script>
 </html>

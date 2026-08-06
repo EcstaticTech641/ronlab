@@ -119,123 +119,8 @@
             <p>A collection of services, projects, and experiments. Explore various tools for media, storage, information, and play.</p>
         </section>
 
-        <!-- Services Section -->
-        <section>
-            <h3 class="section-title">Services</h3>
-            <div class="card-grid">
-                <a href="https://movie.ronlab.site" class="card-link">
-                    <div class="card">
-                        <h3>Jellyfin</h3>
-                        <p>Media server for ron's personal collection of home videos.</p>
-                    </div>
-                </a>
-                <a href="https://emu.ronlab.site" class="card-link">
-                    <div class="card">
-                        <h3>Retro Games</h3>
-                        <p>Private retro game collection.</p>
-                    </div>
-                </a>
-                <a href="https://request.ronlab.site" class="card-link">
-                    <div class="card">
-                        <h3>Requests</h3>
-                        <p>Jellyfin request portal.</p>
-                    </div>
-                </a>
-                <a href="https://cloud.ronlab.site" class="card-link">
-                    <div class="card">
-                        <h3>Files</h3>
-                        <p>Cloud storage for accessing and sharing files across all your devices.</p>
-                    </div>
-                </a>
-                <a href="https://wiki.ronlab.site" class="card-link">
-                    <div class="card">
-                        <h3>Wiki</h3>
-                        <p>Knowledge base for documentation and collaborative information sharing.</p>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <!-- Minecraft Section -->
-        <section>
-            <h3 class="section-title">Minecraft</h3>
-            <div class="card-grid">
-                <a href="https://crafty.ronlab.site/status" class="card-link">
-                    <div class="card">
-                        <h3>Server Status</h3>
-                        <p>Check the status of all Minecraft servers. View player counts and server information.</p>
-                    </div>
-                </a>
-                <a href="minecraft.html" class="card-link">
-                    <div class="card">
-                        <h3>Server Addresses</h3>
-                        <p>MultiMode Java & Bedrock, Survival, and Modded servers.</p>
-                    </div>
-                </a>
-                <a href="https://map.ronlab.site" class="card-link">
-                    <div class="card">
-                        <h3>Map</h3>
-                        <p>Minecraft Vanilla Server map. Explore and visualize your world.</p>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <!-- Games & Experimental Section -->
-        <section>
-            <h3 class="section-title">Games & Experimental</h3>
-            <div class="card-grid">
-                <a href="snake.html" class="card-link">
-                    <div class="card">
-                        <h3>Snake</h3>
-                        <p>Classic snake game. Navigate and grow your snake without hitting walls or yourself.</p>
-                    </div>
-                </a>
-                <a href="flappy.html" class="card-link">
-                    <div class="card">
-                        <h3>Flappy Bird</h3>
-                        <p>Flappy Bird in your browser</p>
-                    </div>
-                </a>
-                <a href="rongario.html" class="card-link">
-                    <div class="card">
-                        <h3>Rongario</h3>
-                        <p>Totally not Agar.io</p>
-                    </div>
-                </a>
-                <a href="discord.html" class="card-link">
-                    <div class="card">
-                        <h3>Discord Color Engine</h3>
-                        <p>Tool for creating and exploring Discord color themes.</p>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <!-- Other Section -->
-        <section>
-            <h3 class="section-title">Other</h3>
-            <div class="card-grid">
-                <a href="https://drive.google.com/drive/folders/1ktByD3DAhQ_q4QXqc3JjcEOgUtWaC5j9?usp=sharing" class="card-link">
-                    <div class="card">
-                        <h3>Ron Lab Modpack</h3>
-                        <p>Curated collection of mods for an enhanced Minecraft experience.</p>
-                    </div>
-                </a>
-                <a href="https://forms.gle/BwYJrXEqpxPvxcif6" class="card-link">
-                    <div class="card">
-                        <h3>Request Form</h3>
-                        <p>Have a feature request or suggestion? Submit your ideas here.</p>
-                    </div>
-                </a>
-                <a href="https://status.ronlab.site" class="card-link">
-                    <div class="card">
-                        <h3>Status</h3>
-                        <p>Real-time monitoring and status of all RonLab services.</p>
-                    </div>
-                </a>
-            </div>
-        </section>
+        <!-- Dynamic Services Grid -->
+        <div id="dynamic-card-grid"></div>
     </main>
 
     <footer>
@@ -246,35 +131,11 @@
 
     <button id="darkModeToggle">Toggle Dark Mode</button>
 
+    <script src="/theme.js"></script>
+    <script src="/app.js"></script>
     <script>
         // Set current year in footer
         document.getElementById('year').textContent = new Date().getFullYear();
-
-        // JavaScript code for toggling dark mode and saving the status
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        const body = document.body;
-
-        darkModeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-
-            // Check if dark mode is active and store the status
-            const isDarkMode = body.classList.contains('dark-mode');
-            if (isDarkMode) {
-                localStorage.setItem('darkMode', 'enabled');
-            } else {
-                localStorage.setItem('darkMode', 'disabled');
-            }
-        });
-
-        // JavaScript code to retrieve and apply dark mode status
-        document.addEventListener('DOMContentLoaded', () => {
-            const isDarkMode = localStorage.getItem('darkMode');
-
-            // Check if dark mode status exists and apply it
-            if (isDarkMode === 'enabled') {
-                body.classList.add('dark-mode');
-            }
-        });
     </script>
 
 </body>

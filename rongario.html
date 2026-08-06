@@ -671,20 +671,7 @@ h1 {
         }
 
         requestAnimationFrame(gameLoop);
-
-
-        // JavaScript code to retrieve and apply dark mode status
-        document.addEventListener('DOMContentLoaded', () => {
-            const isDarkMode = localStorage.getItem('darkMode');
-            const body = document.body;
-
-            // Check if dark mode status exists and apply it
-            if (isDarkMode === 'enabled') {
-                body.classList.add('dark-mode');
-            }
-        });
-
-
     </script>
+    <script src="/theme.js"></script>
 </body>
 </html>
