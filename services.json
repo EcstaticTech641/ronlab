@@ -91,7 +91,7 @@
     "show_in_sitemap": false,
     "metadata": {
       "mc_address": "mc.ronlab.site",
-      "mc_version": "1.21.11",
+      "mc_version": "26.2",
       "mc_status_badge": "Testing"
     }
   },
@@ -104,24 +104,24 @@
     "type": "minecraft_server",
     "show_in_sitemap": false,
     "metadata": {
-      "mc_address": "ronlab.site",
+      "mc_address": "play.ronlab.site",
       "mc_port": "19132",
-      "mc_version": "1.21.11",
+      "mc_version": "26.2",
       "mc_status_badge": "Testing"
     }
   },
   {
-    "id": "mc-survival-java",
-    "title": "Survival Java",
-    "description": "Long-running survival server with established world and community. Build and explore together.",
+    "id": "mc-multimode-java-1",
+    "title": "MultiMode Java - 1",
+    "description": "Stable testing server for the latest Minecraft updates and features.",
     "url": "craft.ronlab.site",
     "category": "Minecraft Servers",
     "type": "minecraft_server",
     "show_in_sitemap": false,
     "metadata": {
       "mc_address": "craft.ronlab.site",
-      "mc_version": "26.1",
-      "mc_status_badge": "Active"
+      "mc_version": "26.1.1",
+      "mc_status_badge": "Testing"
     }
   },
   {
