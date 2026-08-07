@@ -217,5 +217,15 @@
     "type": "subdomain",
     "show_in_sitemap": true,
     "metadata": {}
+  },
+  {
+    "id": "github-dev",
+    "title": "Ron's GitHub",
+    "description": "Explore open-source projects, software developments, and technical experiments.",
+    "url": "https://dev.ronlab.site/",
+    "category": "Other",
+    "type": "subdomain",
+    "show_in_sitemap": true,
+    "metadata": {}
   }
 ]
