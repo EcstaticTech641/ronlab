@@ -34,8 +34,13 @@
     }
 
     function renderCardGrid(container, services) {
-        // Exclude specific server detail entries from main index dashboard
-        const dashboardServices = services.filter(item => item.category !== 'Minecraft Servers');
+        const targetCategory = container.getAttribute('data-category');
+
+        let filteredServices = services.filter(item => item.category !== 'Minecraft Servers');
+
+        if (targetCategory) {
+            filteredServices = filteredServices.filter(item => item.category === targetCategory);
+        }
 
         // Group services by category in deterministic order
         const categoryOrder = ['Services', 'Minecraft', 'Games & Experimental', 'Other'];
@@ -43,7 +48,7 @@
 
         categoryOrder.forEach(cat => { categories[cat] = []; });
 
-        dashboardServices.forEach(item => {
+        filteredServices.forEach(item => {
             if (!categories[item.category]) {
                 categories[item.category] = [];
             }
@@ -56,15 +61,18 @@
             const items = categories[catName];
             if (!items || items.length === 0) continue;
 
+            const hideTitle = !!targetCategory;
+
             html += `
             <section>
-                <h3 class="section-title">${escapeHtml(catName)}</h3>
+                ${hideTitle ? '' : `<h3 class="section-title">${escapeHtml(catName)}</h3>`}
                 <div class="card-grid">
             `;
 
             items.forEach(item => {
+                const targetAttr = (item.type === 'subdomain' || item.type === 'external') ? 'target="_blank" rel="noopener noreferrer"' : '';
                 html += `
-                    <a href="${escapeHtml(item.url)}" class="card-link">
+                    <a href="${escapeHtml(item.url)}" class="card-link" ${targetAttr}>
                         <div class="card">
                             <h3>${escapeHtml(item.title)}</h3>
                             <p>${escapeHtml(item.description)}</p>
@@ -87,11 +95,12 @@
 
         let html = '';
         sitemapServices.forEach(item => {
+            const targetAttr = (item.type === 'subdomain' || item.type === 'external') ? 'target="_blank" rel="noopener noreferrer"' : '';
             html += `
                 <tr>
                     <td>${escapeHtml(item.title)}</td>
                     <td>${escapeHtml(item.description)}</td>
-                    <td><a href="${escapeHtml(item.url)}">${escapeHtml(item.url)}</a></td>
+                    <td><a href="${escapeHtml(item.url)}" ${targetAttr}>${escapeHtml(item.url)}</a></td>
                 </tr>
             `;
         });

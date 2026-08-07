@@ -179,6 +179,16 @@
     "metadata": {}
   },
   {
+    "id": "shantybot",
+    "title": "Shanty Bot",
+    "description": "Pirate-themed local audio Discord bot player preview and track status for active instance.",
+    "url": "https://shanty.ronlab.site",
+    "category": "Games & Experimental",
+    "type": "subdomain",
+    "show_in_sitemap": true,
+    "metadata": {}
+  },
+  {
     "id": "modpack",
     "title": "Ron Lab Modpack",
     "description": "Curated collection of mods for an enhanced Minecraft experience.",
